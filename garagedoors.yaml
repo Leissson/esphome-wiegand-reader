@@ -33,6 +33,13 @@ text_sensor:
     name: "Card ID"
     on_value:
       then:
+# Hardcoded PIN if HA or WiFi is down
+        - lambda: |-
+           if (x == "1234") {
+           id(relay1).turn_on();
+           id(relay2).turn_on();
+           } else {
+           }
         - homeassistant.tag_scanned: !lambda |-
             return x;
 
